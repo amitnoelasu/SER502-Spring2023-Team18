@@ -1,0 +1,27 @@
+Milestone 1 
+
+Amit Noel Thokala -  created github repository, worked on design of the language and documentation.
+
+Yashwanth Kikkuri - Worked on design of the language and documentation.
+
+Suvarshitha Kalvakuntla - Worked on implementation decisions for the lexical analysis and documentation.
+
+Sri Venkata Vivek Dhulipala - Worked on grammar rules for the language and documentation.
+
+Sowmya Veldandi - Worked on design decisions for grammar rules and documentation.
+
+
+How we’ll split the work 
+
+
+Amit Noel Thokala -  Will be working on lexical analyser using FLEX and Bison.
+
+Yashwanth Kikkuri - Will be working on generating the parse tree.
+
+Suvarshitha Kalvakuntla - Will be working on the interpreter and lexical analyser.
+
+Sri Venkata Vivek Dhulipala - Will be working on interpreter and computing the parse tree.
+
+Sowmya Veldandi - Will be working on lexical analyser and interpreter.
+
+
