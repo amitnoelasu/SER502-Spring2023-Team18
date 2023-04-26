@@ -22,6 +22,6 @@ Suvarshitha Kalvakuntla - Will be working on the interpreter and lexical analyse
 
 Sri Venkata Vivek Dhulipala - Will be working on interpreter and computing the parse tree.
 
-Sowmya Veldandi - Will be working on lexical analyser and interpreter.
+Sowmya Veldandi - Will be working on lexical analyser and interpreter .
 
 
