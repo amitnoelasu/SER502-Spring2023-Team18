@@ -61,5 +61,37 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../jar_files/antlr-runtime-3.5.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../jar_files/antlr4-4.12.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../jar_files/antlr4-runtime-4.12.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../jar_files/icu4j-71.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../jar_files/org.abego.treelayout.core-1.0.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../jar_files/ST4-4.3.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/src" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/lib/antlr-runtime-3.5.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/antlr4-4.12.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/antlr4-runtime-4.12.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/icu4j-71.1.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/org.abego.treelayout.core-1.0.3.jar!/" />
+          <root url="jar://$MODULE_DIR$/lib/ST4-4.3.4.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES>
+          <root url="file://$MODULE_DIR$/src/vyass/compiler/generated" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>

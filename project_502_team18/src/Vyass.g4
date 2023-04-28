@@ -1,9 +1,17 @@
-
 grammar Vyass;
 
-Space : [ \t\r\n\u000C] -> skip;
+parse
+  :  (x=.
+          {System.out.printf("text: %-7s  type: %s \n",
+           $x.text, tokenNames[$x.type]);}
+     )*
+     EOF
+  ;
+
+Space : [ \r\t\n\u000C] -> skip;
 
 IF : 'if';
+ELIF : 'elif';
 ELSE : 'else';
 RETURN : 'return';
 BREAK : 'break';
@@ -15,26 +23,25 @@ WHILE : 'while';
 FOR : 'for';
 IN : 'in';
 RANGE : 'range';
-
+MAIN: 'main';
 
 ASSIGNMENT_BINARY : '=';
 ADDITION_BINARY : '+';
-SUBTRACTION_BINARY : '-';
-UN_OP : ADDITION_BINARY | SUBTRACTION_BINARY;
+SUBSTRACTION_BINARY : '-';
 MULTIPLICATION_BINARY : '*';
 DIVISION_BINARY : '/';
 MODULUS_BINARY : '%';
 TERNARY : '?';
 NOT_BINARY : '!';
-LESSTHAN_BINARY : '<';
+LESSTHAN_BINARY  : '<';
 GREATERTHAN_BINARY : '>';
-LESSTHANEQUALS_BINARY : '=<';
-GREATERTHANEQUALS_BINARY : '=>';
+LESSTHANEQUALS_BINARY : '<=';
+GREATERTHANEQUALS_BINARY : '>=';
 EQUALS_BINARY : '==';
 NOTEQUALS_BINARY : '!=';
 AND_BINARY : '&';
 OR_BINARY : '|';
-ARITHMETIC_OP : ADDITION_BINARY | SUBTRACTION_BINARY | MULTIPLICATION_BINARY | DIVISION_BINARY | MODULUS_BINARY;
+ARITHMETIC_OP : ADDITION_BINARY | SUBSTRACTION_BINARY | MULTIPLICATION_BINARY | DIVISION_BINARY | MODULUS_BINARY;
 COMPARISION_OP : GREATERTHANEQUALS_BINARY | LESSTHANEQUALS_BINARY | LESSTHAN_BINARY | GREATERTHAN_BINARY | EQUALS_BINARY | NOTEQUALS_BINARY;
 
 INTEGER_DTYPE : 'int';
@@ -54,66 +61,95 @@ BOOLEAN_LITERAL: 'true' | 'false';
 INTEGER_LITERAL: [1-9] [0-9]* | [0];
 IDENTIFIER : [a-zA-Z_] [a-zA-Z_0-9]*;
 
-LITERAL : INTEGER_LITERAL | BOOLEAN_LITERAL | STRING_LITERAL;
-DTYPE : INTEGER_DTYPE | BOOL_DTYPE | STR_DTYPE;
+literalConst : INTEGER_LITERAL | BOOLEAN_LITERAL | STRING_LITERAL;
+dType : INTEGER_DTYPE | BOOL_DTYPE | STR_DTYPE;
+
+program : BEGIN functionDeclarations* mainFunctionBlock? END;
+mainFunctionBlock : MAIN exprBlock ;
+
+exprBlock: START_BLOCK variableDeclarations* statements* END_BLOCK;
+
+variableDeclarations : dType variableList SEMICOLON_SEP;
+variableList : variableInitialization variableListMulti?;
+variableListMulti : COMMA_SEP variableInitialization variableListMulti?;
+variableInitialization : IDENTIFIER ASSIGNMENT_BINARY literalConst | IDENTIFIER;
+
+functionDeclarations : dType IDENTIFIER LEFT_PAREN parameters? RIGHT_PAREN functionBlock;
+parameters : parameter (multiParameter)*;
+multiParameter : COMMA_SEP parameter;
+parameter : dType IDENTIFIER;
+functionBlock : exprBlock;
+
+statements : assignmentStatement
+| printStatement
+| returnStatement
+| breakStatement
+| continueStatement
+| exprBlock
+| conditionalBlock
+| iterativeBlock
+;
+
+assignmentStatement : assignmentList SEMICOLON_SEP;
+assignmentList : IDENTIFIER ASSIGNMENT_BINARY (assignmentList | express);
+
+printStatement : PRINT LEFT_PAREN express RIGHT_PAREN SEMICOLON_SEP;
+returnStatement : RETURN SEMICOLON_SEP | RETURN express SEMICOLON_SEP;
+continueStatement : CONTINUE SEMICOLON_SEP;
+breakStatement : BREAK SEMICOLON_SEP;
 
 
+conditionalBlock : IF LEFT_PAREN ifCondition RIGHT_PAREN exprBlock elifList;
+elifList : ELIF LEFT_PAREN ifCondition RIGHT_PAREN exprBlock elifList | elseBlock?;
+elseBlock : ELSE exprBlock;
+ifCondition : express;
 
-epsilon : ;
-program : declaration_list function_list;
-declaration_list : declaration | declaration_list declaration | epsilon;
-declaration : DTYPE id_list SEMICOLON_SEP;
-id_list : IDENTIFIER | id_list COMMA_SEP IDENTIFIER;
-function_list : function | function_list function | epsilon;
-function : DTYPE IDENTIFIER LEFT_PAREN parameters RIGHT_PAREN compound_statement;
+iterativeBlock : whileTraditionalBlock | forBlock;
 
+whileTraditionalBlock : WHILE LEFT_PAREN whileCondition RIGHT_PAREN exprBlock;
+whileCondition : express;
 
-parameter : DTYPE IDENTIFIER;
-parameters_list : parameter | parameters_list COMMA_SEP parameter;
-parameters : epsilon | parameters_list;
+forBlock : FOR (forTraditionalBlock | forInRangeBlock);
+forTraditionalBlock : LEFT_PAREN forInit? SEMICOLON_SEP forCondition SEMICOLON_SEP forUpdate? RIGHT_PAREN exprBlock;
+forInRangeBlock : IDENTIFIER IN RANGE LEFT_PAREN forInRangeLowerLimit COMMA_SEP forInRangeUpperLimit RIGHT_PAREN exprBlock;
 
+forInit : forInitStatement (COMMA_SEP forInitStatement)*;
+forInitStatement : forAssign;
+forCondition : express;
+forUpdate : forUpdateStatement (COMMA_SEP forUpdateStatement)*;
+forUpdateStatement : forAssign;
+forAssign : assignmentList;
+forInRangeLowerLimit : express;
+forInRangeUpperLimit : express;
 
-expression : IDENTIFIER ASSIGNMENT_BINARY expression | boolean_expression | epsilon;
-boolean_expression : boolean_expression OR_BINARY and_expression | and_expression |
-epsilon;
+functionCall : IDENTIFIER LEFT_PAREN values? RIGHT_PAREN;
+values : functionValue (COMMA_SEP functionValue)*;
+functionValue : express;
 
-
-compound_statement : START_BLOCK declaration_list statement END_BLOCK;
-
-
-else_if_list : else_if_list ELSE IF LEFT_PAREN boolean_expression RIGHT_PAREN
-START_BLOCK statement END_BLOCK | epsilon;
-
-if_else_selection_stmt : IF LEFT_PAREN boolean_expression RIGHT_PAREN
-START_BLOCK statement END_BLOCK else_if_list | IF LEFT_PAREN boolean_expression
-RIGHT_PAREN START_BLOCK statement END_BLOCK else_if_list ELSE START_BLOCK
-statement END_BLOCK;
-statement : expression_stmt | compound_statement | if_else_selection_stmt | loop_stmt |
-return_stmt | display_stmt | epsilon;
-expression_stmt : expression SEMICOLON_SEP | SEMICOLON_SEP;
-display_stmt : PRINT LEFT_PAREN expression RIGHT_PAREN | epsilon;
-return_stmt : RETURN | RETURN LEFT_PAREN expression RIGHT_PAREN;
-
-
-unary_expression : NOT_BINARY unary_expression | comparision_expression | const | method_call ;
-and_expression : and_expression AND_BINARY unary_expression | unary_expression;
-
-
-
-comparision_expression : arithmetic_expression COMPARISION_OP arithmetic_expression |
-arithmetic_expression;
-arithmetic_expression : epsilon | arithmetic_expression ARITHMETIC_OP
-arithmetic_expression;
-const : INTEGER_LITERAL | STRING_LITERAL | BOOLEAN_LITERAL;
-method_call : IDENTIFIER LEFT_PAREN argument_list RIGHT_PAREN;
-argument_list : argument_list COMMA_SEP expression | expression | epsilon;
-loop_expression : boolean_expression | boolean_expression CONTINUE | boolean_expression BREAK;
-loop_stmt : WHILE LEFT_PAREN loop_expression RIGHT_PAREN START_BLOCK statement
-END_BLOCK | FOR loop_number START_BLOCK statement END_BLOCK;
-loop_number : LEFT_PAREN IDENTIFIER ASSIGNMENT_BINARY boolean_expression SEMICOLON_SEP
-IDENTIFIER COMPARISION_OP boolean_expression SEMICOLON_SEP expression RIGHT_PAREN |
-IDENTIFIER IN RANGE LEFT_PAREN boolean_expression COMMA_SEP boolean_expression RIGHT_PAREN;
-
-
-
-
+rExpress : express;
+express:
+LEFT_PAREN express RIGHT_PAREN      #parametersExpression
+| '-' express       #unaryNegationExpression
+| '!' express       #unaryNotExpression
+| express MULTIPLICATION_BINARY rExpress        #binaryMultiplicationExpression
+| express DIVISION_BINARY rExpress      #binaryDivisionExpression
+| express MODULUS_BINARY rExpress       #binaryModulusExpression
+| express ADDITION_BINARY rExpress      #binaryAdditionExpression
+| express SUBSTRACTION_BINARY rExpress      #binarySubstractionExpression
+| express GREATERTHANEQUALS_BINARY rExpress     #binaryGreaterThanEqualsExpression
+| express LESSTHANEQUALS_BINARY rExpress        #binaryLessThanEqualsExpression
+| express GREATERTHAN_BINARY rExpress       #binaryGreaterThanExpression
+| express LESSTHAN_BINARY rExpress      #binaryLessThanExpression
+| express EQUALS_BINARY rExpress        #binaryEqualsExpression
+| express NOTEQUALS_BINARY rExpress     #binaryNotEqualsExpression
+| express '&&' rExpress     #logicalAndExpression
+| express '||' rExpress     #logicalOrExpression
+| express '?' ternaryTrue ':' ternaryFalse    #ternaryCondnExpression
+| INTEGER_LITERAL       #integerLiteralExpression
+| BOOLEAN_LITERAL       #booleanLiteralExpression
+| STRING_LITERAL        #stringLiteralExpression
+| IDENTIFIER        #identifierExpression
+| functionCall      #functionCallExpression
+;
+ternaryTrue : express;
+ternaryFalse : express;
