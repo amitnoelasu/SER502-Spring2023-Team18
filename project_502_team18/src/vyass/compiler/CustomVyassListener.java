@@ -1,14 +1,14 @@
 package vyass.compiler;
 
-import vyass.compiler.gener.*;
 import org.antlr.v4.runtime.ParserRuleContext;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
+import vyass.compiler.gener.*;
 
-public class CustomVyassListener {
+public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener {
     public static final String INT_TYPE = "int";
     public static final String BOOL_TYPE = "bool";
     public static final String STR_TYPE = "str";
@@ -161,12 +161,12 @@ public class CustomVyassListener {
 
     //Variable initialization listeners
     @Override
-    public void enterVariableDeclaration(VyassParser.VariableDeclarationsContext context) {
+    public void enterVariableDeclarations(VyassParser.VariableDeclarationsContext context) {
         this.currentVariableType = context.dType().getText();
     }
 
     @Override
-    public void exitVariableDeclaration(VyassParser.VariableDeclarationsContext context) {
+    public void exitVariableDeclarations(VyassParser.VariableDeclarationsContext context) {
         this.currentVariableType = null;
     }
 
@@ -226,7 +226,7 @@ public class CustomVyassListener {
     }
 
     @Override
-    public void exitExprBlock(VyassParser.ExpressContext context) {
+    public void exitExprBlock(VyassParser.ExprBlockContext context) {
         lastExpressionResultType = expressionStack.pop();
     }
 
@@ -490,13 +490,13 @@ public class CustomVyassListener {
     }
 
     @Override
-    public void exitFunctionvalue(VyassParser.FunctionValueContext context) {
+    public void exitFunctionValue(VyassParser.FunctionValueContext context) {
         Pair<String, Integer> currentFunction = functionCallPairStack.pop();
         if (functionMap.get(currentFunction.key()).size() <= currentFunction.value()) {
             throw new RuntimeException(getPositionForErrorFunc(context) + "The no. of values passed in the function as parameters " + currentFunction.key() + " are more than the defined number of parameters");
         }
         if (!functionMap.get(currentFunction.key()).get(currentFunction.value()).equals(lastExpressionResultType)) {
-            throw new RuntimeException(getPositionForErrorFunc(context) + "The type of passed value in the argument doesn't match the defined value in the function " + currFunc.getKey());
+            throw new RuntimeException(getPositionForErrorFunc(context) + "The type of passed value in the argument doesn't match the defined value in the function " + currentFunction.key());
         }
         lastExpressionResultType = null;
         functionCallPairStack.push(new Pair<>(currentFunction.key(), currentFunction.value() + 1));

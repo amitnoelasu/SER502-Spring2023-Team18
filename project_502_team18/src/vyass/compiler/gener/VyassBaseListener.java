@@ -1,16 +1,17 @@
 // Generated from C:/Users/sdhulip7/Documents/SER502-Spring2023-Team18/project_502_team18/src\Vyass.g4 by ANTLR 4.12.0
-
+package vyass.compiler.gener;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.TerminalNode;
-
+import vyass.compiler.gener.VyassListener;
+import vyass.compiler.gener.VyassParser;
 /**
  * This class provides an empty implementation of {@link VyassListener},
  * which can be extended to create a listener which only needs to handle a subset
  * of the available methods.
  */
 @SuppressWarnings("CheckReturnValue")
-public class VyassBaseListener implements VyassListener {
+public abstract class VyassBaseListener implements VyassListener {
 	/**
 	 * {@inheritDoc}
 	 *
@@ -119,6 +120,9 @@ public class VyassBaseListener implements VyassListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitVariableListMulti(VyassParser.VariableListMultiContext ctx) { }
+
+	public abstract void enterMainBlock(VyassParser.MainFunctionBlockContext ctx);
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -527,6 +531,10 @@ public class VyassBaseListener implements VyassListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFunctionValue(VyassParser.FunctionValueContext ctx) { }
+
+	//Expression listeners
+	public abstract void enterExprBlock(VyassParser.ExpressContext context);
+
 	/**
 	 * {@inheritDoc}
 	 *
@@ -852,4 +860,5 @@ public class VyassBaseListener implements VyassListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void visitErrorNode(ErrorNode node) { }
+
 }

@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="project_502_team18:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/project_502_team18_jar</output-path>
+    <root id="archive" name="project_502_team18.jar">
+      <element id="module-output" name="project_502_team18" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/SER502-Spring2022-Team8-main/SER502-Spring2022-Team8-main/lib/antlr-4.10.1-complete.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

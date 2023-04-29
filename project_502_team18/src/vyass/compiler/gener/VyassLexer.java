@@ -1,4 +1,5 @@
 // Generated from C:/Users/sdhulip7/Documents/SER502-Spring2023-Team18/project_502_team18/src\Vyass.g4 by ANTLR 4.12.0
+package vyass.compiler.gener;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
