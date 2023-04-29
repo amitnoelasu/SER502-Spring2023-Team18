@@ -1,0 +1,5 @@
+begin
+ main {
+        print("Hello World!!");
+    }
+end

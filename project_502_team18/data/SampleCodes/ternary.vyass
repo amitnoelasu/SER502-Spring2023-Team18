@@ -1,0 +1,8 @@
+begin
+    main {
+        num x=1, y=3;
+        bool z;
+        z = ((x==y) ? true : false);
+        print(z);
+    }
+end
