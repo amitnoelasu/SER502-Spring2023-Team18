@@ -1,6 +1,6 @@
 ASSIGN x 1
 ASSIGN x 1 
-LOOP < x , 7 
+LOOP LESSTHAN x , 7 
 {
 ASSIGN y ADD x , 1 
 DISPLAY y 

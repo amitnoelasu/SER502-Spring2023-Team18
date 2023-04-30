@@ -1,6 +1,6 @@
 ASSIGN a 10
 ASSIGN b 5
-IF > a , b 
+IF GREATERTHAN a , b 
 TRUE {
 DISPLAY a 
 }

@@ -1,5 +1,5 @@
 ASSIGN num 3
-IF == num , 0 
+IF EQUALS_TO num , 0 
 TRUE {
 DISPLAY "Inside IF" 
 }

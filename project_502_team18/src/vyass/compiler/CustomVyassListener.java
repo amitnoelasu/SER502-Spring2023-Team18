@@ -32,13 +32,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     public static final String MUL_CMD = "MUL";
     public static final String DIV_CMD = "DIV";
     public static final String MOD_CMD = "MOD";
-    public static final String NOT_OPERATOR = "!";
-    public static final String EQUALS_OPERATOR = "==";
-    public static final String NOT_EQUALS_OPERATOR = "!=";
-    public static final String LESS_THAN_OPERATOR = "<";
-    public static final String GREATER_THAN_OPERATOR = ">";
-    public static final String LESS_THAN_OR_EQUALS_OPERATOR = "<=";
-    public static final String GREATER_THAN_OR_EQUALS_OPERATOR = ">=";
+    public static final String EQUALS_OPERATOR = "EQUALSTO";
+    public static final String NOT_EQUALS_OPERATOR = "NOTEQUALS";
+    public static final String LESS_THAN_OPERATOR = "LESSTHAN";
+    public static final String GREATER_THAN_OPERATOR = "GREATERTHAN";
+    public static final String LESS_THAN_OR_EQUALS_OPERATOR = "LESSTHANEQUALS";
+    public static final String GREATER_THAN_OR_EQUALS_OPERATOR = "GREATERTHANEQUALS";
     public static final String AND_OPERATOR = "&&";
     public static final String OR_OPERATOR = "||";
     public static final String START_BLOCK = "{";
@@ -304,12 +303,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
 
     @Override
     public void enterUnaryNotExpression(VyassParser.UnaryNotExpressionContext context) {
-        intermediateCodeBuilder.append(NOT_OPERATOR + " ");
+        intermediateCodeBuilder.append(NEG_CMD + " ");
     }
 
     @Override
     public void exitUnaryNotExpression(VyassParser.UnaryNotExpressionContext context) {
-        validateUnaryExpressionCompatibility(NOT_OPERATOR, BOOL_TYPE, context);
+        validateUnaryExpressionCompatibility(NEG_CMD, BOOL_TYPE, context);
         expressionStack.push(BOOL_TYPE);
     }
 
