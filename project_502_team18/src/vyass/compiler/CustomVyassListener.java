@@ -1,15 +1,15 @@
 package vyass.compiler;
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import vyass.compiler.gener.VyassParser;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
-import vyass.compiler.gener.*;
 
 public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener {
-    public static final String INT_TYPE = "int";
+    public static final String INT_TYPE = "number";
     public static final String BOOL_TYPE = "bool";
     public static final String STR_TYPE = "str";
 
@@ -221,12 +221,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
 
     //Expression listeners
     @Override
-    public void enterExprBlock(VyassParser.ExprBlockContext context) {
+    public void enterExpression_expr(VyassParser.Expression_exprContext context) {
         lastExpressionResultType = null;
     }
 
     @Override
-    public void exitExprBlock(VyassParser.ExprBlockContext context) {
+    public void exitExpression_expr(VyassParser.Expression_exprContext context) {
         lastExpressionResultType = expressionStack.pop();
     }
 

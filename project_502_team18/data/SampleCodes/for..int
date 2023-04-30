@@ -1,0 +1,7 @@
+ASSIGN x 1
+ASSIGN x 1 
+LOOP < x , 7 
+{
+DISPLAY x 
+ASSIGN x ADD x , 1 
+}

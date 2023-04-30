@@ -150,7 +150,7 @@ LEFT_PAREN express RIGHT_PAREN      #parametersExpression
 | BOOLEAN_LITERAL       #booleanLiteralExpression
 | STRING_LITERAL        #stringLiteralExpression
 | IDENTIFIER        #identifierExpression
-| functionCall      #functionCallExpression
-;
+| functionCall      #functionCallExpression;
+
 ternaryTrue : express;
 ternaryFalse : express;
