@@ -155,7 +155,7 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     }
 
     @Override
-    public void enterMainBlock(VyassParser.MainFunctionBlockContext ctx) {
+    public void enterMainFunctionBlock(VyassParser.MainFunctionBlockContext ctx) {
         isInMainBlock = true;
     }
 
@@ -174,7 +174,7 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     public void enterVariableInitialization(VyassParser.VariableInitializationContext context) {
         if (context.literalConst() != null) {
             if (!getConstType(context.literalConst()).equals(this.currentVariableType)) {
-                throw new RuntimeException(getPositionForErrorFunc(context) + "Variable Type" + context.IDENTIFIER().getText() + " does not match the type of assigned value.");
+                throw new RuntimeException(getPositionForErrorFunc(context) + "Variable Type " + context.IDENTIFIER().getText() + " does not match the type of assigned value.");
             }
 
             addVariableToContext(context.IDENTIFIER().getText(), this.currentVariableType, context);
@@ -221,7 +221,7 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
 
     //Expression listeners
     @Override
-    public void enterExprBlock(VyassParser.ExpressContext context) {
+    public void enterExprBlock(VyassParser.ExprBlockContext context) {
         lastExpressionResultType = null;
     }
 

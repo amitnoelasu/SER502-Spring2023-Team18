@@ -16,8 +16,8 @@
         <PerGrammarGenerationSettings>
           <option name="fileName" value="$PROJECT_DIR$/src/Vyass.g4" />
           <option name="autoGen" value="true" />
-          <option name="outputDir" value="C:\Users\athokal1\Documents\502\project_git\SER502-Spring2023-Team18\project_502_team18\src\vyass\compiler\gener" />
-          <option name="libDir" value="C:\Users\athokal1\Documents\502\project_git\SER502-Spring2023-Team18\project_502_team18\src" />
+          <option name="outputDir" value="C:\Users\athokal1\Documents\502\project_git1\SER502-Spring2023-Team18\project_502_team18\src\vyass\compiler\gener" />
+          <option name="libDir" value="C:\Users\athokal1\Documents\502\project_git1\SER502-Spring2023-Team18\project_502_team18\src" />
           <option name="encoding" value="" />
           <option name="pkg" value="" />
           <option name="language" value="" />

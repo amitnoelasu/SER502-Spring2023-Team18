@@ -10,7 +10,7 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../SER502-Spring2022-Team8-main/SER502-Spring2022-Team8-main/lib/antlr-4.10.1-complete.jar!/" />
+          <root url="jar://$USER_HOME$/Downloads/antlr-4.12.0-complete.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

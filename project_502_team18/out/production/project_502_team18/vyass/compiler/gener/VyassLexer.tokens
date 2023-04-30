@@ -79,7 +79,7 @@ IDENTIFIER=49
 '!='=31
 '&'=32
 '|'=33
-'int'=36
+'number'=36
 'bool'=37
 'string'=38
 ','=39
