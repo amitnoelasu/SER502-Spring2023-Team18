@@ -1,7 +1,7 @@
 begin
   main {
-    int a = 10;
-    int b = 5;
+    number a = 10;
+    number b = 5;
     if(a>b) {
     print (a);
     }

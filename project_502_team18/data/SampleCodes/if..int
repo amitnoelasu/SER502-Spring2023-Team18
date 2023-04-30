@@ -1,0 +1,8 @@
+ASSIGN num 3
+IF == num , 0 
+TRUE {
+DISPLAY "Inside IF" 
+}
+FALSE {
+DISPLAY "Inside ELSE" 
+}

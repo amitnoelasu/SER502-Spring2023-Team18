@@ -1,13 +1,13 @@
 begin
-    int fact(int number, bool t) {
-            if(number == 0) {
+    number fact(number num, bool t) {
+            if(num == 0) {
                 return 1;
             } else {
-                return number*fact(number-1, t);
+                return num*fact(num-1, t);
             }
         }
     main {
-        int number = 6;
-        print(fact(number, true));
+        number num = 6;
+        print(fact(num, true));
     }
 end

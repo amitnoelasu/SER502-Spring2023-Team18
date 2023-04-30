@@ -1,0 +1,4 @@
+ASSIGN x 1
+ASSIGN y 3
+ASSIGN z TERNARY == x , y TRUE { true } FALSE { false } 
+DISPLAY z 
