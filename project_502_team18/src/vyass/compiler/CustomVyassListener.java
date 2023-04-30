@@ -33,12 +33,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     public static final String DIV_CMD = "DIV";
     public static final String MOD_CMD = "MOD";
     public static final String NOT_OPERATOR = "!";
-    public static final String EQUALS_OPERATOR = "==";
-    public static final String NOT_EQUALS_OPERATOR = "!=";
-    public static final String LESS_THAN_OPERATOR = "<";
-    public static final String GREATER_THAN_OPERATOR = ">";
-    public static final String LESS_THAN_OR_EQUALS_OPERATOR = "<=";
-    public static final String GREATER_THAN_OR_EQUALS_OPERATOR = ">=";
+    public static final String EQUALS_OPERATOR = "EQUALS_TO";
+    public static final String NOT_EQUALS_OPERATOR = "NOT_EQUALS";
+    public static final String LESS_THAN_OPERATOR = "LESS_THAN";
+    public static final String GREATER_THAN_OPERATOR = "GREATER_THAN";
+    public static final String LESS_THAN_OR_EQUALS_OPERATOR = "LESS_THAN_EQUALS";
+    public static final String GREATER_THAN_OR_EQUALS_OPERATOR = "GREATER_THAN_EQUALS";
     public static final String AND_OPERATOR = "&&";
     public static final String OR_OPERATOR = "||";
     public static final String START_BLOCK = "{";
