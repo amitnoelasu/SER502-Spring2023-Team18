@@ -197,14 +197,14 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
         if (!variableMap.containsKey(context.IDENTIFIER().getText())) {
             throw new RuntimeException(getPositionForErrorFunc(context) + "Variable " + context.IDENTIFIER().getText() + " is not defined");
         }
-        if (context.express() != null) {
+        if (context.expression_expr() != null) {
             intermediateCodeBuilder.append(ASSIGN_CMD + " ").append(context.IDENTIFIER().getText()).append(" ");
             previousVariable = context.IDENTIFIER().getText();
         }
     }
     @Override
     public void exitAssignmentList(VyassParser.AssignmentListContext context) {
-        if (context.express() == null) {
+        if (context.expression_expr() == null) {
             intermediateCodeBuilder.append("\n");
             if (!variableMap.get(context.IDENTIFIER().getText()).equals(variableMap.get(previousVariable))) {
                 throw new RuntimeException(getPositionForErrorFunc(context) + context.IDENTIFIER().getText() + " and the variable " + previousVariable + " are of different data types");
@@ -523,11 +523,11 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     public void exitReturnStatement(VyassParser.ReturnStatementContext context) {
         intermediateCodeBuilder.append("\n");
         if (isInMainBlock) {
-            if (context.express() != null) {
+            if (context.expression_expr() != null) {
                 throw new RuntimeException(getPositionForErrorFunc(context) + "The return statement for main block has to be empty");
             }
         } else {
-            if (context.express() == null) {
+            if (context.expression_expr() == null) {
                 throw new RuntimeException(getPositionForErrorFunc(context) + "missing return value");
             }
             if (!functionMap.get(currentFunctionName).get(0).equals(lastExpressionResultType)) {

@@ -270,6 +270,12 @@ public interface VyassVisitor<T> extends ParseTreeVisitor<T> {
 	 */
 	T visitFunctionValue(VyassParser.FunctionValueContext ctx);
 	/**
+	 * Visit a parse tree produced by {@link VyassParser#expression_expr}.
+	 * @param ctx the parse tree
+	 * @return the visitor result
+	 */
+	T visitExpression_expr(VyassParser.Expression_exprContext ctx);
+	/**
 	 * Visit a parse tree produced by {@link VyassParser#rExpress}.
 	 * @param ctx the parse tree
 	 * @return the visitor result

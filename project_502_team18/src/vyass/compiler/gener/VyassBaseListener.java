@@ -532,6 +532,18 @@ public class VyassBaseListener implements VyassListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterExpression_expr(VyassParser.Expression_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitExpression_expr(VyassParser.Expression_exprContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterRExpress(VyassParser.RExpressContext ctx) { }
 	/**
 	 * {@inheritDoc}
