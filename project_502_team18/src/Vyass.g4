@@ -7,7 +7,6 @@ parse
      )*
      EOF
   ;
-
 Space : [ \r\t\n\u000C] -> skip;
 
 IF : 'if';
@@ -105,14 +104,11 @@ elseBlock : ELSE exprBlock;
 ifCondition : expression_expr;
 
 iterativeBlock : whileTraditionalBlock | forBlock;
-
 whileTraditionalBlock : WHILE LEFT_PAREN whileCondition RIGHT_PAREN exprBlock;
 whileCondition : expression_expr;
-
 forBlock : FOR (forTraditionalBlock | forInRangeBlock);
 forTraditionalBlock : LEFT_PAREN forInit? SEMICOLON_SEP forCondition SEMICOLON_SEP forUpdate? RIGHT_PAREN exprBlock;
 forInRangeBlock : IDENTIFIER IN RANGE LEFT_PAREN forInRangeLowerLimit COMMA_SEP forInRangeUpperLimit RIGHT_PAREN exprBlock;
-
 forInit : forInitStatement (COMMA_SEP forInitStatement)*;
 forInitStatement : forAssign;
 forCondition : expression_expr;
@@ -151,6 +147,5 @@ LEFT_PAREN express RIGHT_PAREN      #parametersExpression
 | STRING_LITERAL        #stringLiteralExpression
 | IDENTIFIER        #identifierExpression
 | functionCall      #functionCallExpression;
-
 ternaryTrue : express;
 ternaryFalse : express;
