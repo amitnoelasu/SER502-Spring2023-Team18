@@ -1,4 +1,0 @@
-ASSIGN x 1
-ASSIGN z 2
-ASSIGN y 2
-DISPLAY ADD x , y 

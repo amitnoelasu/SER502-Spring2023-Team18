@@ -10,7 +10,8 @@ public enum TokenType {
     METH("METH"),
     METHODLOAD("LOAD"),
     KEYWORD("[A-Z][A-Z]*"),
-    IDENTIFIER("[a-z_][A-Za-z0-9]*");
+    IDENTIFIER("[a-z_][A-Za-z0-9]*"),
+    LT("<");
 
     public final String pattern;
 

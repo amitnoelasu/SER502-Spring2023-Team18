@@ -1,0 +1,15 @@
+ASSIGN x 1
+ASSIGN y 4
+IF == x , 1 
+TRUE {
+DISPLAY "Yess!! x is equal to 1" 
+}
+ASSIGN x 1 
+LOOP < x , 7 
+{
+DISPLAY x 
+ASSIGN x ADD x , 1 
+}
+DISPLAY y 
+DISPLAY "Print y" 
+DISPLAY true 

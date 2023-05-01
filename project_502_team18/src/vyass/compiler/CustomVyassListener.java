@@ -1,15 +1,15 @@
 package vyass.compiler;
 
 import org.antlr.v4.runtime.ParserRuleContext;
+import vyass.compiler.gener.VyassParser;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.*;
-import vyass.compiler.gener.*;
 
 public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener {
-    public static final String INT_TYPE = "int";
+    public static final String INT_TYPE = "number";
     public static final String BOOL_TYPE = "bool";
     public static final String STR_TYPE = "str";
 
@@ -32,13 +32,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     public static final String MUL_CMD = "MUL";
     public static final String DIV_CMD = "DIV";
     public static final String MOD_CMD = "MOD";
-    public static final String NOT_OPERATOR = "!";
-    public static final String EQUALS_OPERATOR = "==";
-    public static final String NOT_EQUALS_OPERATOR = "!=";
-    public static final String LESS_THAN_OPERATOR = "<";
-    public static final String GREATER_THAN_OPERATOR = ">";
-    public static final String LESS_THAN_OR_EQUALS_OPERATOR = "<=";
-    public static final String GREATER_THAN_OR_EQUALS_OPERATOR = ">=";
+    public static final String EQUALS_OPERATOR = "EQUALSTO";
+    public static final String NOT_EQUALS_OPERATOR = "NOTEQUALS";
+    public static final String LESS_THAN_OPERATOR = "LESSTHAN";
+    public static final String GREATER_THAN_OPERATOR = "GREATERTHAN";
+    public static final String LESS_THAN_OR_EQUALS_OPERATOR = "LESSTHANEQUALS";
+    public static final String GREATER_THAN_OR_EQUALS_OPERATOR = "GREATERTHANEQUALS";
     public static final String AND_OPERATOR = "&&";
     public static final String OR_OPERATOR = "||";
     public static final String START_BLOCK = "{";
@@ -197,14 +196,14 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
         if (!variableMap.containsKey(context.IDENTIFIER().getText())) {
             throw new RuntimeException(getPositionForErrorFunc(context) + "Variable " + context.IDENTIFIER().getText() + " is not defined");
         }
-        if (context.express() != null) {
+        if (context.expression_expr() != null) {
             intermediateCodeBuilder.append(ASSIGN_CMD + " ").append(context.IDENTIFIER().getText()).append(" ");
             previousVariable = context.IDENTIFIER().getText();
         }
     }
     @Override
     public void exitAssignmentList(VyassParser.AssignmentListContext context) {
-        if (context.express() == null) {
+        if (context.expression_expr() == null) {
             intermediateCodeBuilder.append("\n");
             if (!variableMap.get(context.IDENTIFIER().getText()).equals(variableMap.get(previousVariable))) {
                 throw new RuntimeException(getPositionForErrorFunc(context) + context.IDENTIFIER().getText() + " and the variable " + previousVariable + " are of different data types");
@@ -221,12 +220,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
 
     //Expression listeners
     @Override
-    public void enterExprBlock(VyassParser.ExprBlockContext context) {
+    public void enterExpression_expr(VyassParser.Expression_exprContext context) {
         lastExpressionResultType = null;
     }
 
     @Override
-    public void exitExprBlock(VyassParser.ExprBlockContext context) {
+    public void exitExpression_expr(VyassParser.Expression_exprContext context) {
         lastExpressionResultType = expressionStack.pop();
     }
 
@@ -304,12 +303,12 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
 
     @Override
     public void enterUnaryNotExpression(VyassParser.UnaryNotExpressionContext context) {
-        intermediateCodeBuilder.append(NOT_OPERATOR + " ");
+        intermediateCodeBuilder.append(NEG_CMD + " ");
     }
 
     @Override
     public void exitUnaryNotExpression(VyassParser.UnaryNotExpressionContext context) {
-        validateUnaryExpressionCompatibility(NOT_OPERATOR, BOOL_TYPE, context);
+        validateUnaryExpressionCompatibility(NEG_CMD, BOOL_TYPE, context);
         expressionStack.push(BOOL_TYPE);
     }
 
@@ -523,11 +522,11 @@ public class CustomVyassListener extends vyass.compiler.gener.VyassBaseListener 
     public void exitReturnStatement(VyassParser.ReturnStatementContext context) {
         intermediateCodeBuilder.append("\n");
         if (isInMainBlock) {
-            if (context.express() != null) {
+            if (context.expression_expr() != null) {
                 throw new RuntimeException(getPositionForErrorFunc(context) + "The return statement for main block has to be empty");
             }
         } else {
-            if (context.express() == null) {
+            if (context.expression_expr() == null) {
                 throw new RuntimeException(getPositionForErrorFunc(context) + "missing return value");
             }
             if (!functionMap.get(currentFunctionName).get(0).equals(lastExpressionResultType)) {

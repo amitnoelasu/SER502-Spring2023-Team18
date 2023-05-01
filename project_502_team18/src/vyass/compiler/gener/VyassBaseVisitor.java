@@ -1,7 +1,7 @@
 // Generated from C:/Users/athokal1/Documents/502/project_git1/SER502-Spring2023-Team18/project_502_team18/src\Vyass.g4 by ANTLR 4.12.0
 package vyass.compiler.gener;
 import org.antlr.v4.runtime.tree.AbstractParseTreeVisitor;
-
+import vyass.compiler.gener.*;
 /**
  * This class provides an empty implementation of {@link VyassVisitor},
  * which can be extended to create a visitor which only needs to handle a subset
@@ -313,6 +313,13 @@ public class VyassBaseVisitor<T> extends AbstractParseTreeVisitor<T> implements 
 	 * {@link #visitChildren} on {@code ctx}.</p>
 	 */
 	@Override public T visitFunctionValue(VyassParser.FunctionValueContext ctx) { return visitChildren(ctx); }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation returns the result of calling
+	 * {@link #visitChildren} on {@code ctx}.</p>
+	 */
+	@Override public T visitExpression_expr(VyassParser.Expression_exprContext ctx) { return visitChildren(ctx); }
 	/**
 	 * {@inheritDoc}
 	 *

@@ -1,0 +1,7 @@
+begin
+    main {
+        number x=1,z=2;
+        number y=2;
+        print(x+y);
+    }
+end

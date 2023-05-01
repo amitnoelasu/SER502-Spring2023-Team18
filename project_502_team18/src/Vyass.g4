@@ -7,7 +7,6 @@ parse
      )*
      EOF
   ;
-
 Space : [ \r\t\n\u000C] -> skip;
 
 IF : 'if';
@@ -91,10 +90,10 @@ statements : assignmentStatement
 ;
 
 assignmentStatement : assignmentList SEMICOLON_SEP;
-assignmentList : IDENTIFIER ASSIGNMENT_BINARY (assignmentList | express);
+assignmentList : IDENTIFIER ASSIGNMENT_BINARY (assignmentList | expression_expr);
 
-printStatement : PRINT LEFT_PAREN express RIGHT_PAREN SEMICOLON_SEP;
-returnStatement : RETURN SEMICOLON_SEP | RETURN express SEMICOLON_SEP;
+printStatement : PRINT LEFT_PAREN expression_expr RIGHT_PAREN SEMICOLON_SEP;
+returnStatement : RETURN SEMICOLON_SEP | RETURN expression_expr SEMICOLON_SEP;
 continueStatement : CONTINUE SEMICOLON_SEP;
 breakStatement : BREAK SEMICOLON_SEP;
 
@@ -102,30 +101,28 @@ breakStatement : BREAK SEMICOLON_SEP;
 conditionalBlock : IF LEFT_PAREN ifCondition RIGHT_PAREN exprBlock elifList;
 elifList : ELIF LEFT_PAREN ifCondition RIGHT_PAREN exprBlock elifList | elseBlock?;
 elseBlock : ELSE exprBlock;
-ifCondition : express;
+ifCondition : expression_expr;
 
 iterativeBlock : whileTraditionalBlock | forBlock;
-
 whileTraditionalBlock : WHILE LEFT_PAREN whileCondition RIGHT_PAREN exprBlock;
-whileCondition : express;
-
+whileCondition : expression_expr;
 forBlock : FOR (forTraditionalBlock | forInRangeBlock);
 forTraditionalBlock : LEFT_PAREN forInit? SEMICOLON_SEP forCondition SEMICOLON_SEP forUpdate? RIGHT_PAREN exprBlock;
 forInRangeBlock : IDENTIFIER IN RANGE LEFT_PAREN forInRangeLowerLimit COMMA_SEP forInRangeUpperLimit RIGHT_PAREN exprBlock;
-
 forInit : forInitStatement (COMMA_SEP forInitStatement)*;
 forInitStatement : forAssign;
-forCondition : express;
+forCondition : expression_expr;
 forUpdate : forUpdateStatement (COMMA_SEP forUpdateStatement)*;
 forUpdateStatement : forAssign;
 forAssign : assignmentList;
-forInRangeLowerLimit : express;
-forInRangeUpperLimit : express;
+forInRangeLowerLimit : expression_expr;
+forInRangeUpperLimit : expression_expr;
 
 functionCall : IDENTIFIER LEFT_PAREN values? RIGHT_PAREN;
 values : functionValue (COMMA_SEP functionValue)*;
-functionValue : express;
+functionValue : expression_expr;
 
+expression_expr : express;
 rExpress : express;
 express:
 LEFT_PAREN express RIGHT_PAREN      #parametersExpression
@@ -149,7 +146,6 @@ LEFT_PAREN express RIGHT_PAREN      #parametersExpression
 | BOOLEAN_LITERAL       #booleanLiteralExpression
 | STRING_LITERAL        #stringLiteralExpression
 | IDENTIFIER        #identifierExpression
-| functionCall      #functionCallExpression
-;
+| functionCall      #functionCallExpression;
 ternaryTrue : express;
 ternaryFalse : express;

@@ -1,0 +1,13 @@
+begin
+    main {
+        number num = 3;
+        if(num == 0)
+        {
+            print("Inside IF");
+        }
+        else
+        {
+          print("Inside ELSE");
+        }
+    }
+end

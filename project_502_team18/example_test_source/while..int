@@ -1,0 +1,6 @@
+ASSIGN x 3
+LOOP EQUALS_TO x , 0 
+{
+ASSIGN x SUB x , 1 
+}
+DISPLAY x 

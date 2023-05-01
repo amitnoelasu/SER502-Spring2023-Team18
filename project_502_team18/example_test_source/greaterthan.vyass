@@ -1,0 +1,9 @@
+begin
+  main {
+    number a = 10;
+    number b = 5;
+    if(a>b) {
+    print (a);
+    }
+  }
+end

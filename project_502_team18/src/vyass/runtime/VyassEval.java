@@ -590,27 +590,27 @@ public class VyassEval {
             operatorIntCode = 5;
             operatorIntFlag = true;
         }
-        else if(val.equals("<")){
+        else if(val.equals("LESSTHAN")){
             operatorComparatorCode = 1;
             operatorComparatorFlag = true;
         }
-        else if(val.equals(">")){
+        else if(val.equals("GREATERTHAN")){
             operatorComparatorCode = 2;
             operatorComparatorFlag = true;
         }
-        else if(val.equals(">=")){
+        else if(val.equals("GREATERTHANEQUALS")){
             operatorComparatorCode = 3;
             operatorComparatorFlag = true;
         }
-        else if(val.equals("<=")){
+        else if(val.equals("LESSTHANEQUALS")){
             operatorComparatorCode = 4;
             operatorComparatorFlag = true;
         }
-        else if(val.equals("==")){
+        else if(val.equals("EQUALSTO")){
             operatorComparatorCode = 5;
             operatorComparatorFlag = true;
         }
-        else if(val.equals("!=")){
+        else if(val.equals("NOTEQUALS")){
             operatorComparatorCode = 6;
             operatorComparatorFlag = true;
         }

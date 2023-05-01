@@ -3,7 +3,7 @@
     <output-path>$PROJECT_DIR$/out/artifacts/project_502_team18_jar</output-path>
     <root id="archive" name="project_502_team18.jar">
       <element id="module-output" name="project_502_team18" />
-      <element id="extracted-dir" path="$USER_HOME$/Downloads/antlr-4.12.0-complete.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/antlr-4.12.0-complete.jar" path-in-jar="/" />
     </root>
   </artifact>
 </component>
