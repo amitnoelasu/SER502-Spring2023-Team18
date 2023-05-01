@@ -1,8 +1,0 @@
-ASSIGN num 3
-IF EQUALS_TO num , 0 
-TRUE {
-DISPLAY "Inside IF" 
-}
-FALSE {
-DISPLAY "Inside ELSE" 
-}
