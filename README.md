@@ -49,7 +49,7 @@ follow these steps to be able to locate and organize different components of the
 # To execute the JAR file, follow these steps:
 
 1. Navigate to the folder where the JAR file is located.
-2. Open the command prompt or terminal and type "java -jar <Jar-File-Name>.jar <Path to file containing code>".
+2. Open the command prompt or terminal and type "java -jar \<Jar-File-Name\>\.jar \<Path to file containing code\>".
 3. Replace <Jar-File-Name> with the name of your JAR file and <Path to file containing code> with the path to the file containing your code.
 
 # follow these steps to be able to execute your JAR file with your code.
