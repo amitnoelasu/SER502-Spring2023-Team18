@@ -8,7 +8,7 @@ The team members are
 - Suvarshitha Kalvakuntla
 - Yashwanth Reddy Kikkuri
 
-The language is called as **Vyass** . The link to the youtube video is : https://youtu.be/Kd0HDRmv8oM
+The language is called as **Vyass**
 
 The repository has the following structure:
 
